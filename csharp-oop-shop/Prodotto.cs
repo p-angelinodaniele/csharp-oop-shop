@@ -25,40 +25,44 @@ namespace csharp_oop_shop
             this.descrizione = descrizione;
             this.prezzo = prezzo;
             this.iva = iva;
-            
-            
+
+
+            Random random = new Random();
+            codice = random.Next(100);
+
+
 
         }
 
 
         //--------------GETTERS AND SETTERS------------
-        public long getCodice()
+        public string GetCodice()
         {
-            
-
-            return codice;
+            string codiceConIlPadding;
+            codiceConIlPadding = PadLeft();
+            return codiceConIlPadding;
         }
 
-        public string getNome()
+        public string GetNome()
         {
             return nome;
         }
-        public string getDescrizione()
+        public string GetDescrizione()
         {
             return descrizione;
         }
-        public double getPrezzo()
+        public double GetPrezzo()
         {
             return prezzo;
         }
-        public double getIva()
+        public double GetIva()
         {
             return iva;
         }
 
        
 
-        public void setPrezzo(double nuovoPrezzo)
+        public void SetPrezzo(double nuovoPrezzo)
         {
             if (nuovoPrezzo < 0)
             {
@@ -69,7 +73,7 @@ namespace csharp_oop_shop
             }
         }
 
-        public void setIva(double nuovaIva)
+        public void SetIva(double nuovaIva)
         {
             if (nuovaIva < 0)
             {
@@ -80,12 +84,12 @@ namespace csharp_oop_shop
                iva = nuovaIva;
             }
         }
-        public void setDescrizione(string nuovaDescrizione)
+        public void SetDescrizione(string nuovaDescrizione)
         {
             descrizione = nuovaDescrizione; 
         }
 
-        public void setNome(string nuovoNome)
+        public void SetNome(string nuovoNome)
         {
             nome = nuovoNome;
         }
@@ -96,17 +100,17 @@ namespace csharp_oop_shop
 
         //----------------------FUNZIONI------------------------
 
-        public void nomeEsteso()
+        public void NomeEsteso()
         {
             Console.WriteLine("Il codice + nome è: " + codice + "-" + nome);
         }
 
 
-        public void padLeft()
+        private string PadLeft()
         {
             string codiceString = codice.ToString();
             char zero = '0';
-            Console.WriteLine("Il codice per intero è: " + codiceString.PadLeft(8, zero));
+            return codiceString.PadLeft(8, zero);
         }
 
 
@@ -114,21 +118,17 @@ namespace csharp_oop_shop
 
 
 
-        public int ottieniCodice()
-        {
-            Random random = new Random();
-            codice = random.Next(1000);
-            return codice;
-        }
+        
 
 
 
-        public double prezzoConIva()
+        public double PrezzoSenzaIva()
         {
             double totale;
-            iva = (100 - iva) / 100;
-            totale = prezzo * iva;
-            Console.WriteLine("Il prezzo con iva di " + nome + " è: " + totale + " euro.");
+            double percentualePrezzoSenzaIva;
+            percentualePrezzoSenzaIva = (100 - iva);
+            totale = prezzo * percentualePrezzoSenzaIva / 100;
+            Console.WriteLine("Il prezzo senza iva di " + nome + " è: " + totale + " euro.");
             return totale;
 
         }
